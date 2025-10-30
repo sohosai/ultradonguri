@@ -1,21 +1,29 @@
 services:
   server:
-    image: ghcr.io/sohosai/ultradonguri-server:production
+    image: ghcr.io/sohosai/ultradonguri-server:latest
     restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
       TZ: Asia/Tokyo
-    networks:
-      - app-network
+      # OBS WebSocket Address and Password (MUST)
+      ADDRESS: host.docker.internal:4455
+      # OBS WebSocket Password (MUST)
+      PASSWORD: "XFCEbOG7vNB0OlBO"
+      NORMAL_SCENE_NAME: "Normal_Scene"
+      MUTED_SCENE_NAME: "Muted_Scene"
+      CM_SCENE_NAME: "CM_Scene"
+      CONTROLLER_ADDRESS: "http://localhost:5173,http://127.0.0.1:5173,http://0.0.0.0:5173"
+      SCENE_BACKUP_PATH: "/app/data/scene.json"
+      TELOP_BACKUP_PATH: "/app/data/telop.json"
+    volumes:
+      - ./server-data:/app/data
+      - ./events.json:/app/events.json
 
   client:
-    image: ghcr.io/sohosai/ultradonguri-controller:production
+    image: ghcr.io/sohosai/ultradonguri-controller:latest
     restart: unless-stopped
     ports:
       - "5173:5173"
-    networks:
-      - app-network
-
-networks:
-  app-network:
+    environment:
+      TZ: Asia/Tokyo
