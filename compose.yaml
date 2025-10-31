@@ -9,7 +9,7 @@ services:
       # OBS WebSocket Address and Password (MUST)
       ADDRESS: host.docker.internal:4455
       # OBS WebSocket Password (MUST)
-      PASSWORD: "XFCEbOG7vNB0OlBO"
+      PASSWORD: "your-obs-password"
       NORMAL_SCENE_NAME: "Normal_Scene"
       MUTED_SCENE_NAME: "Muted_Scene"
       CM_SCENE_NAME: "CM_Scene"
