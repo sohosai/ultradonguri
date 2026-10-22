@@ -11,11 +11,10 @@ services:
       # OBS WebSocket Password (MUST)
       PASSWORD: "your-obs-password"
       NORMAL_SCENE_NAME: "Normal_Scene"
-      MUTED_SCENE_NAME: "Muted_Scene"
       CM_SCENE_NAME: "CM_Scene"
+      Burari_SCENE_NAME: "Burari_Scene"
       CONTROLLER_ADDRESS: "http://localhost:5173,http://127.0.0.1:5173,http://0.0.0.0:5173"
       SCENE_BACKUP_PATH: "/app/data/scene.json"
-      TELOP_BACKUP_PATH: "/app/data/telop.json"
     volumes:
       - ./server-data:/app/data
       - ./events.json:/app/events.json
