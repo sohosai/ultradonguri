@@ -1,9 +1,11 @@
 services:
   server:
-    image: ghcr.io/sohosai/ultradonguri-server:latest
+    image: ghcr.io/sohosai/ultradonguri-server:production
     restart: unless-stopped
     ports:
       - "8080:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       TZ: Asia/Tokyo
       # OBS WebSocket Address and Password (MUST)
@@ -12,17 +14,19 @@ services:
       PASSWORD: "your-obs-password"
       NORMAL_SCENE_NAME: "Normal_Scene"
       CM_SCENE_NAME: "CM_Scene"
-      Burari_SCENE_NAME: "Burari_Scene"
-      CONTROLLER_ADDRESS: "http://localhost:5173,http://127.0.0.1:5173,http://0.0.0.0:5173"
+      BURARI_SCENE_NAME: "Burari_Scene"
+      CONTROLLER_ADDRESS: "http://localhost:5173,http://127.0.0.1:5173"
       SCENE_BACKUP_PATH: "/app/data/scene.json"
     volumes:
       - ./server-data:/app/data
-      - ./events.json:/app/events.json
 
   client:
-    image: ghcr.io/sohosai/ultradonguri-controller:latest
+    image: ghcr.io/sohosai/ultradonguri-controller:production
     restart: unless-stopped
     ports:
       - "5173:5173"
     environment:
       TZ: Asia/Tokyo
+    volumes:
+      - ${PERFORMANCES_FILE:-./performances.sample.json}:/app/dist/performances.json:ro
+      - ./videos:/app/videos
