@@ -25,19 +25,25 @@ OBSでWebSocketサーバーを有効にしてください：
 
 ### 2. 環境設定
 
-`compose.yaml` の環境変数を編集してください：
+`.env.example` を `.env` にコピーして、OBS WebSocket のパスワードなどを設定してください。`.env` はgitignoreされています。
 
-```yaml
-server:
-  environment:
-    # OBS WebSocketのパスワード（必須）
-    PASSWORD: "your_obs_password"
-
-    # OBSのシーン名（必要に応じて変更）
-    NORMAL_SCENE_NAME: "Normal_Scene"
-    CM_SCENE_NAME: "CM_Scene"
-    BURARI_SCENE_NAME: "Burari_Scene"
+```powershell
+Copy-Item .env.example .env
 ```
+
+```env
+ADDRESS=host.docker.internal:4455
+PASSWORD=your_obs_password
+NORMAL_SCENE_NAME=Normal_Scene
+CM_SCENE_NAME=CM_Scene
+BURARI_SCENE_NAME=Burari_Scene
+CONTROLLER_ADDRESS=http://localhost:5173,http://127.0.0.1:5173
+SCENE_BACKUP_PATH=/app/data/scene.json
+TZ=Asia/Tokyo
+PERFORMANCES_FILE=./performances.json
+```
+
+`PASSWORD` が未設定の場合は `docker compose` がエラーになります。
 
 ### 3. イベントデータ
 

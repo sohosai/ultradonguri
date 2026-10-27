@@ -5,16 +5,16 @@ services:
     ports:
       - "8080:8080"
     environment:
-      TZ: Asia/Tokyo
+      TZ: "${TZ:-Asia/Tokyo}"
       # OBS WebSocket Address and Password (MUST)
-      ADDRESS: host.docker.internal:4455
+      ADDRESS: "${ADDRESS:-host.docker.internal:4455}"
       # OBS WebSocket Password (MUST)
-      PASSWORD: "your-obs-password"
-      NORMAL_SCENE_NAME: "Normal_Scene"
-      CM_SCENE_NAME: "CM_Scene"
-      BURARI_SCENE_NAME: "Burari_Scene"
-      CONTROLLER_ADDRESS: "http://localhost:5173,http://127.0.0.1:5173"
-      SCENE_BACKUP_PATH: "/app/data/scene.json"
+      PASSWORD: "${PASSWORD:?PASSWORD is required}"
+      NORMAL_SCENE_NAME: "${NORMAL_SCENE_NAME:-Normal_Scene}"
+      CM_SCENE_NAME: "${CM_SCENE_NAME:-CM_Scene}"
+      BURARI_SCENE_NAME: "${BURARI_SCENE_NAME:-Burari_Scene}"
+      CONTROLLER_ADDRESS: "${CONTROLLER_ADDRESS:-http://localhost:5173,http://127.0.0.1:5173}"
+      SCENE_BACKUP_PATH: "${SCENE_BACKUP_PATH:-/app/data/scene.json}"
     volumes:
       - ./server-data:/app/data
 
@@ -24,7 +24,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      TZ: Asia/Tokyo
+      TZ: "${TZ:-Asia/Tokyo}"
     volumes:
       - ${PERFORMANCES_FILE:-./performances.sample.json}:/app/dist/performances.json:ro
       - ./videos:/app/videos
