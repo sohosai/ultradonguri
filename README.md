@@ -82,7 +82,7 @@ docker compose up -d
 
 - `performances.json`: イベントデータ（gitignore）
 - `videos/`: ぶらり旅の動画アップロード先（gitignore）
-- `server-data/`: OBSシーンのバックアップ（gitignore）
+- `server-data/`: OBSシーンのバックアップ（gitignore）(現状未使用)
 
 ## 開発者向け情報
 
@@ -100,5 +100,4 @@ docker compose up -d
 
 ### 注意
 
-- controllerイメージにはビルド時の `VITE_OSECHI_BASE_URL` が埋め込まれています。osechiのURLやCORS設定を変更する場合はcontrollerイメージの再ビルドが必要です。
 - `videos/` は動画アップロードの永続化用です。ディレクトリが無い場合は作成してください。
