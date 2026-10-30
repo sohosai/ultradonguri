@@ -25,6 +25,10 @@ services:
       - "5173:5173"
     environment:
       TZ: "${TZ:-Asia/Tokyo}"
+      # ミュート用。ブラウザから見た OBS WebSocket の接続先
+      OBS_WEBSOCKET_URL: "${OBS_WEBSOCKET_URL:-ws://localhost:4455}"
+      # server と同じ OBS WebSocket のパスワードを使う
+      OBS_WEBSOCKET_PASSWORD: "${PASSWORD:?PASSWORD is required}"
     volumes:
       - ${PERFORMANCES_FILE:-./performances.sample.json}:/app/dist/performances.json:ro
       - ./videos:/app/videos
